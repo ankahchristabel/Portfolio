@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project: Hosting a Static Website on AWS</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <span class="logo-text">Christabel</span>
+                </div>
+                <nav class="nav-menu" id="navMenu">
+                    <a href="index.html" class="nav-link">HOME</a>
+                    <a href="about.html" class="nav-link">ABOUT</a>
+                    <a href="service.html" class="nav-link">SERVICE</a>
+                    <a href="projects.html" class="nav-link active">PROJECTS</a>
+                    <a href="contact.html" class="nav-link">CONTACT</a>
+                </nav>
+                <button class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Project Detail Section -->
+    <section class="projects-section">
+        <div class="hero-background">
+            <div class="gradient-shape shape-1"></div>
+            <div class="gradient-shape shape-2"></div>
+            <div class="gradient-shape shape-3"></div>
+        </div>
+        <div class="container">
+            <div class="projects-content">
+                <h1 class="projects-title">HOSTING A STATIC WEBSITE ON AWS WITH S3 AND CLOUDFRONT:A STEPPING MILESTONE ACHIEVEMENT</h1>
+                 <div style="text-align:center; margin-top:-10px;">
+                     <span style="font-size:18px; letter-spacing:6px;">&#8226;&#8226;&#8226;</span>
+                 </div>
+                 <p style="text-align:center; margin-top:10px; opacity:0.8; font-size:12px;">2 min read</p>
+                 <div style="text-align:center; margin-top:20px; margin-bottom:20px;">
+                     <a href="projects.html" class="cta-button"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+                 </div>
+ 
+                 <div class="hero-content" style="grid-template-columns: 1fr; gap: 20px; max-width: 920px; margin: 0 auto;">
+                     <div class="hero-image" style="margin: 0 auto; max-width: 920px;">
+                         <img src="https://files.cdn-files-a.com/uploads/9157782/2000_676ef870150a3.png" alt="Hosting a Static Website on AWS with S3 and CloudFront: A Stepping Milestone Achievement" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
+                     </div>
+                     <div class="hero-text" style="max-width: 920px; margin: 0 auto;">
+                         <p class="description" style="margin-top: 16px;">
+                             On this day, I stepped up to host my very own static website on AWS, leveraging Amazon S3 for storage and CloudFront for global content delivery. It seems simple, but it marked a meaningful milestone in my cloud learning journey—hands-on deployment, HTTPS, caching, and cost-efficiency all working together. Below is a short overview and visual of the result.
+                         </p>
+                     </div>
+                 </div>
+                 
+                 <div style="max-width: 920px; margin: 30px auto 0;">
+                     <p class="description" style="margin-bottom: 10px;"><strong>Step 1: Create an S3 Bucket</strong></p>
+                     <p class="description" style="margin: 0 0 10px 0;">
+                         I started by creating an S3 bucket, which is the foundation for my static website. To host the static site, I configured the following settings:
+                     </p>
+                     <ul class="description" style="margin: 0 0 16px 18px;">
+                         <li><strong>Log in:</strong> AWS Management Console.</li>
+                         <li><strong>Navigate:</strong> To S3 and create a new bucket</li>
+                         <li><strong>Bucket name:</strong> I chose a globally unique name for my bucket.</li>
+                         <li><strong>Static website hosting:</strong> I enabled static website hosting.</li>
+                     </ul>
+                     <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                         <img src="https://files.cdn-files-a.com/uploads/9157782/2000_676ef789b31de.png" alt="Step 1: Create an S3 Bucket" style="width:100%; height:auto; display:block;">
+                     </div>
+                 </div>
+ 
+                 <div style="max-width: 920px; margin: 30px auto 0;">
+                     <p class="description" style="margin-bottom: 10px;"><strong>Step 2: Upload Website Files</strong></p>
+                     <p class="description" style="margin: 0 0 10px 0;">
+                         After the bucket creation, I uploaded all of the HTML, CSS, and JavaScript files for my static website straight into the S3 bucket.
+                     </p>
+                     <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                         <img src="https://files.cdn-files-a.com/uploads/9157782/2000_676ef7a4e8e88.png" alt="Step 2: Upload Website Files" style="width:100%; height:auto; display:block;">
+                     </div>
+                 </div>
+ 
+                 <div style="max-width: 920px; margin: 30px auto 0;">
+                     <p class="description" style="margin-bottom: 10px;"><strong>Step 3: Create CloudFront Distribution</strong></p>
+                     <p class="description" style="margin: 0 0 10px 0;">
+                         To enhance my website’s performance and reliability, I created a CloudFront distribution. In the CloudFront console, I created a new distribution and configured the origin to point to my S3 bucket hosting the static site.
+                     </p>
+                     <ul class="description" style="margin: 0 0 16px 18px;">
+                         <li><strong>Go to CloudFront:</strong> Open the CloudFront console and create a new distribution.</li>
+                         <li><strong>Origin:</strong> Select the S3 bucket as the origin for the distribution.</li>
+                     </ul>
+                     <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                         <img src="https://files.cdn-files-a.com/uploads/9157782/2000_676ef7bd6fa5b.png" alt="Step 3: Create CloudFront Distribution" style="width:100%; height:auto; display:block;">
+                     </div>
+                 </div>
+ 
+                 <div style="max-width: 920px; margin: 30px auto 0;">
+                     <p class="description" style="margin-bottom: 10px;"><strong>Step 4: Set Permissions</strong></p>
+                     <p class="description" style="margin: 0 0 10px 0;">
+                         Allowing read access to the CloudFront Origin Access (OAC/OAI) so objects in the S3 bucket are securely served through CloudFront.
+                     </p>
+                     <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                         <img src="https://files.cdn-files-a.com/uploads/9157782/2000_676ef7d20744e.png" alt="Step 4: Set Permissions - Allow read access to CloudFront origin access" style="width:100%; height:auto; display:block;">
+                     </div>
+                 </div>
+ 
+                 <div style="max-width: 920px; margin: 30px auto 0;">
+                     <p class="description" style="margin-bottom: 10px;"><strong>Step 5: Set Up CloudWatch Metrics</strong></p>
+                     <p class="description" style="margin: 0 0 10px 0;">
+                         To enhance my website’s performance and reliability, I enabled CloudFront metrics in CloudWatch to monitor distribution activity and identify trends or issues quickly.
+                     </p>
+                     <ul class="description" style="margin: 0 0 16px 18px;">
+                         <li><strong>CloudFront metrics:</strong> Selected and enabled CloudFront standard metrics in CloudWatch for visibility into requests, errors, and data transfer.</li>
+                     </ul>
+                     <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                         <img src="https://files.cdn-files-a.com/uploads/9157782/2000_676ef7f6f06d8.png" alt="Step 5: Set Up CloudWatch Metrics" style="width:100%; height:auto; display:block;">
+                     </div>
+                     <p class="description" style="margin: 16px 0 10px 0;">
+                         I selected all the available metrics for my CloudFront distribution to get comprehensive visibility.
+                     </p>
+                     <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                         <img src="https://files.cdn-files-a.com/uploads/9157782/2000_676ef8119bfbb.png" alt="CloudFront metrics selection - all metrics enabled" style="width:100%; height:auto; display:block;">
+                     </div>
+                 </div>
+ 
+                 <div style="max-width: 920px; margin: 30px auto 60px;">
+                     <p class="description" style="margin-bottom: 10px;"><strong>Step 6: Test the Website</strong></p>
+                     <p class="description" style="margin: 0 0 10px 0;">
+                         After setting up everything, I tested my website using the CloudFront distribution domain name, and it worked flawlessly. The content was served globally, fast, and securely.
+                     </p>
+                     <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                         <img src="https://files.cdn-files-a.com/uploads/9157782/2000_676ef82fc7529.png" alt="Step 6: Test the Website via CloudFront distribution domain" style="width:100%; height:auto; display:block;">
+                     </div>
+                 </div>
+ 
+                 <div style="max-width: 920px; margin: 10px auto 80px;">
+                     <p class="description" style="font-weight:700; margin-bottom: 8px;">What I Learned Along the Way</p>
+                     <p class="description" style="margin: 0 0 10px 0;">
+                         The experience of hosting my static website on AWS using S3 and CloudFront was great. It helped me:
+                     </p>
+                     <ul class="description" style="margin: 0 0 16px 18px;">
+                         <li>Understand how AWS S3, CloudFront, and other services work together to deliver fast, reliable, and scalable websites.</li>
+                         <li>See how you can scale automatically, reduce latency, and distribute content globally without managing physical servers—a game-changer for developers.</li>
+                         <li>Appreciate how a few hurdles can teach more about cloud architecture and the importance of paying attention to detail.</li>
+                     </ul>
+ 
+                     <p class="description" style="font-weight:700; margin: 18px 0 8px 0;">Conclusion</p>
+                     <p class="description" style="margin: 0;">
+                         This milestone has been an exciting one in my journey in cloud. I look forward to exploring more AWS services, building more simple systems to complex systems, and expanding my knowledge of cloud-based technologies. Let’s connect and share ideas.
+                     </p>
+                 </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <style>
+        /* Mobile optimizations for project detail page */
+        @media (max-width: 768px) {
+            .projects-content > div[style*="max-width: 920px"] {
+                max-width: 100% !important;
+                padding: 0 10px !important;
+            }
+            
+            .hero-content[style*="max-width: 920px"] {
+                max-width: 100% !important;
+                padding: 0 10px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .projects-content > div[style*="max-width: 920px"] {
+                padding: 0 5px !important;
+            }
+            
+            .hero-content[style*="max-width: 920px"] {
+                padding: 0 5px !important;
+            }
+        }
+    </style>
+</body>
+</html>
+
+

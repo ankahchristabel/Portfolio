@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project: Implementing an Image Analyzer to Detect Photo Friendliness</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <span class="logo-text">Christabel</span>
+                </div>
+                <nav class="nav-menu" id="navMenu">
+                    <a href="index.html" class="nav-link">HOME</a>
+                    <a href="about.html" class="nav-link">ABOUT</a>
+                    <a href="service.html" class="nav-link">SERVICE</a>
+                    <a href="projects.html" class="nav-link active">PROJECTS</a>
+                    <a href="contact.html" class="nav-link">CONTACT</a>
+                </nav>
+                <button class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Project Detail Section -->
+    <section class="projects-section">
+        <div class="hero-background">
+            <div class="gradient-shape shape-1"></div>
+            <div class="gradient-shape shape-2"></div>
+            <div class="gradient-shape shape-3"></div>
+        </div>
+        <div class="container">
+            <div class="projects-content">
+                <h1 class="projects-title">IMPLEMENTING AN IMAGE ANALYZER TO DETECT PHOTO FRIENDLINESS.</h1>
+                <div style="text-align:center; margin-top:-10px;">
+                    <span style="font-size:18px; letter-spacing:6px;">&#8226;&#8226;&#8226;</span>
+                </div>
+                <p style="text-align:center; margin-top:10px; opacity:0.8; font-size:12px;">3 min read</p>
+                <div style="text-align:center; margin-top:20px; margin-bottom:20px;">
+                    <a href="projects.html" class="cta-button"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+                </div>
+
+                <div class="hero-content" style="grid-template-columns: 1fr; gap: 20px; max-width: 920px; margin: 0 auto;">
+                    <div class="hero-image" style="margin: 0 auto; max-width: 920px;">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/800_6790297b10e44.png" alt="Implementing an Image Analyzer to Detect Photo Friendliness." style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
+                    </div>
+                    <div class="hero-text" style="max-width: 920px; margin: 0 auto;">
+                        <p class="description" style="margin-top: 16px;">
+                            A computer-vision powered utility that evaluates whether a photo is “friendly” for public sharing using a mix of quality, composition, and content heuristics. Details and steps coming up next.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="max-width: 920px; margin: 20px auto 0;">
+                    <p class="description" style="margin-bottom: 12px;">
+                        In today's digital age, first impressions are often made online. Whether it's LinkedIn, a company website, or social media, your profile picture greatly influences how people perceive you. Ensuring that your profile photo conveys professionalism and approachability is essential for networking success. I tried a serverless machine learning project on AWS. This article explores how I implemented an image analyzer to detect “friendliness” in photos leveraging AWS-native machine learning services. I achieved this using Lambda, Rekognition and API Gateway.
+                    </p>
+                    <p class="description" style="font-weight:700; margin: 18px 0 8px 0;">Solution Architecture</p>
+                    <p class="description" style="margin-bottom: 10px;">The solution implements a cloud-native architecture with the following components:</p>
+                    <ul class="description" style="margin: 0 0 16px 18px;">
+                        <li><strong>Amazon Rekognition:</strong> Pre-trained to detect facial details, quality, and other attributes—perfect for this use case.</li>
+                        <li><strong>AWS Lambda:</strong> Runs the business logic, calls Rekognition, and generates responses.</li>
+                        <li><strong>Amazon API Gateway:</strong> Exposes a RESTful interface for the analyzer.</li>
+                        <li><strong>CLI and Postman:</strong> Used for provisioning and testing the endpoints.</li>
+                    </ul>
+                </div>
+
+                <div style="max-width: 920px; margin: 20px auto 0;">
+                    <p class="description" style="font-weight:700; margin: 0 0 8px 0;">Step-by-Step Implementation</p>
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Write the Lambda Function</strong></p>
+                    <p class="description" style="margin: 0 0 12px 0;">
+                        This AWS Lambda function analyzes a photo to determine if it is suitable based on facial features using Amazon Rekognition.
+                    </p>
+                    <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 16px; overflow-x: auto;">
+<pre style="margin:0;"><code># lambda_function.py
+import json
+import base64
+import logging
+import boto3
+from botocore.exceptions import ClientError
+
+logger = logging.getLogger(__name__)
+rekognition = boto3.client("rekognition")
+
+def lambda_handler(event, context):
+    try:
+        # Determine image source from event
+        if "image" in event:
+            img_b64decoded = base64.b64decode(event["image"])
+            image = {"Bytes": img_b64decoded}
+        else:
+            raise ValueError("Image payload not provided")
+
+        response = rekognition.detect_faces(Image=image, Attributes=["ALL"])
+        if len(response["FaceDetails"]) != 1:
+            raise ValueError("Photo must contain exactly one face")
+
+        face = response["FaceDetails"][0]
+        smile_ok = face.get("Smile", {}).get("Value", False)
+        eyes_open_ok = face.get("EyesOpen", {}).get("Value", False)
+
+        result = "Good Profile Photo" if (smile_ok and eyes_open_ok) else "Bad Profile Photo"
+        return {"statusCode": 200, "body": json.dumps(result)}
+
+    except ClientError as err:
+        msg = f"Couldn't analyze image. {err.response['Error']['Message']}"
+        logger.error("Error function %s: %s", context.invoked_function_arn, msg)
+        return {"statusCode": 400, "body": json.dumps({"Error": err.response['Error']['Code'], "ErrorMessage": msg})}
+    except ValueError as val_err:
+        logger.error("Error function %s: %s", context.invoked_function_arn, str(val_err))
+        return {"statusCode": 400, "body": json.dumps({"Error": "ValueError", "ErrorMessage": str(val_err)})}
+</code></pre>
+                    </div>
+                </div>
+
+                <div style="max-width: 920px; margin: 24px auto 60px;">
+                    <p class="description" style="font-weight:700; margin: 0 0 8px 0;">Define the Infrastructure with Terraform</p>
+                    <p class="description" style="margin: 0 0 10px 0;">
+                        The infrastructure is managed using Terraform (IaC). Key components include IAM roles and policies for fine‑grained access, the Lambda function deployment, and API Gateway configuration with request/response mappings.
+                    </p>
+                    <ul class="description" style="margin: 0 0 12px 18px;">
+                        <li><strong>IAM Roles and Policies:</strong> Grant least‑privilege access to Lambda and Rekognition.</li>
+                        <li><strong>Lambda Function:</strong> Deployed with Python runtime and environment variables.</li>
+                        <li><strong>API Gateway:</strong> REST endpoints integrated with Lambda.</li>
+                    </ul>
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Key Terraform commands used in this demo-project:</strong></p>
+                    <p class="description" style="margin: 0 0 12px 0;">terraform init - This command iniliazes the project.</p>
+                    <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/2000_67902846efef0.png" alt="Terraform CLI output for the image analyzer project" style="width:100%; height:auto; display:block;">
+                    </div>
+                     <p class="description" style="margin: 12px 0 0 0;">terraform apply - This command deploys the resources</p>
+                     <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5); margin-top: 12px;">
+                         <img src="https://files.cdn-files-a.com/uploads/9157782/2000_67902891f40e6.png" alt="Terraform apply output showing resource deployment" style="width:100%; height:auto; display:block;">
+                     </div>
+                    <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5); margin-top: 12px;">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/2000_679028b0bf91e.png" alt="Additional Terraform apply output" style="width:100%; height:auto; display:block;">
+                    </div>
+                    <p class="description" style="margin: 16px 0 0 0;">All resources were created for deployment.</p>
+                </div>
+                
+                <div style="max-width: 920px; margin: 10px auto 60px;">
+                    <p class="description" style="font-weight:700; margin: 0 0 8px 0;">3. Testing with Postman</p>
+                    <p class="description" style="margin: 0 0 10px 0;">
+                        The API endpoints were validated using Postman for integration testing. The testing protocol included:
+                    </p>
+                    <ul class="description" style="margin: 0 0 0 18px;">
+                        <li>Base64 encoding of test images</li>
+                        <li>HTTP POST requests to the API endpoint</li>
+                        <li>Response validation for both success and error cases</li>
+                        <li>Edge case testing for various facial expressions and image qualities</li>
+                    </ul>
+                    <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5); margin-top: 12px;">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/2000_679028f66d356.png" alt="Postman testing screenshot" style="width:100%; height:auto; display:block;">
+                    </div>
+                    <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5); margin-top: 12px;">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/2000_6790290f0f9c6.png" alt="Postman testing screenshot - friendly photo response" style="width:100%; height:auto; display:block;">
+                    </div>
+                    <p class="description" style="margin: 10px 0 0 0; opacity: 0.9;">
+                        The image above is the output response when a good photo was tested.
+                    </p>
+                    <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5); margin-top: 12px;">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/2000_6790292c92cba.png" alt="Postman testing screenshot - alternate case" style="width:100%; height:auto; display:block;">
+                    </div>
+                    <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5); margin-top: 12px;">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/2000_6790292c92cba.png" alt="Postman testing screenshot - alternate case" style="width:100%; height:auto; display:block;">
+                    </div>
+                    <p class="description" style="margin: 10px 0 0 0; opacity: 0.9;">
+                        The image above is the output response when a bad photo was tested.
+                    </p>
+                    <p class="description" style="margin: 12px 0 0 0;">
+                        The Amazon Rekognition is invoked to analyze the image and extract attributes like face details then return a json response indicating if the image meets standards.
+                    </p>
+                </div>
+
+                <div style="max-width: 920px; margin: 30px auto 0;">
+                    <p class="description" style="font-weight:700; margin: 0 0 8px 0;">Challenges and Lessons Learned</p>
+                    <ul class="description" style="margin: 0 0 16px 18px;">
+                        <li><strong>IAM Roles and Policies:</strong> Proper IAM permissions were critical for Lambda, and Rekognition to work together seamlessly. Debugging permission issues consumed significant time but taught me the importance of fine-graining access controls.</li>
+                        <li><strong>Error Handling:</strong> API Gateway and Lambda require robust error-handling mechanisms to ensure a smooth user experience.</li>
+                        <li><strong>Response Consistency:</strong> Rekognition's results needed post-processing to ensure they aligned with what the user expects (e.g., converting numerical values into "friendly" or "not friendly").</li>
+                    </ul>
+                </div>
+
+                <div style="max-width: 920px; margin: 30px auto 60px;">
+                    <p class="description" style="font-weight:700; margin: 0 0 8px 0;">Conclusion</p>
+                    <p class="description" style="margin: 0 0 0 0;">
+                        The implementation showcases how modern cloud services can be orchestrated to create sophisticated ML-powered applications while maintaining high reliability and scalability. By combining Amazon Rekognition's advanced machine learning capabilities with Lambda and API Gateway, I was able to create a scalable solution. Feel free to share your thoughts about the implementation. I'd love to hear your feedback!
+                    </p>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <style>
+        /* Mobile optimizations for project detail page */
+        @media (max-width: 768px) {
+            .projects-content > div[style*="max-width: 920px"] {
+                max-width: 100% !important;
+                padding: 0 10px !important;
+            }
+            
+            .hero-content[style*="max-width: 920px"] {
+                max-width: 100% !important;
+                padding: 0 10px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .projects-content > div[style*="max-width: 920px"] {
+                padding: 0 5px !important;
+            }
+            
+            .hero-content[style*="max-width: 920px"] {
+                padding: 0 5px !important;
+            }
+        }
+    </style>
+</body>
+</html>
+
+

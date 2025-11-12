@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project: Hosting a Recipe-Sharing Application</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <span class="logo-text">Christabel</span>
+                </div>
+                <nav class="nav-menu" id="navMenu">
+                    <a href="index.html" class="nav-link">HOME</a>
+                    <a href="about.html" class="nav-link">ABOUT</a>
+                    <a href="service.html" class="nav-link">SERVICE</a>
+                    <a href="projects.html" class="nav-link active">PROJECTS</a>
+                    <a href="contact.html" class="nav-link">CONTACT</a>
+                </nav>
+                <button class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Project Detail Section -->
+    <section class="projects-section">
+        <div class="hero-background">
+            <div class="gradient-shape shape-1"></div>
+            <div class="gradient-shape shape-2"></div>
+            <div class="gradient-shape shape-3"></div>
+        </div>
+        <div class="container">
+            <div class="projects-content">
+                <h1 class="projects-title">HOSTING A RECIPE-SHARING APPLICATION:ANOTHER STEPPING MILESTONE</h1>
+                <div style="text-align:center; margin-top:-10px;">
+                    <span style="font-size:18px; letter-spacing:6px;">&#8226;&#8226;&#8226;</span>
+                </div>
+                <p style="text-align:center; margin-top:10px; opacity:0.8; font-size:12px;">4 min read</p>
+                <div style="text-align:center; margin-top:20px; margin-bottom:20px;">
+                    <a href="projects.html" class="cta-button"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+                </div>
+
+                <div class="hero-content" style="grid-template-columns: 1fr; gap: 20px; max-width: 920px; margin: 0 auto;">
+                    <div class="hero-image" style="margin: 0 auto; max-width: 920px;">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/800_67e813b635597.png" alt="Hosting a Recipe-Sharing Application: Another Stepping Milestone Achievement" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
+                    </div>
+                    <div class="hero-text" style="max-width: 920px; margin: 0 auto;">
+                        <p class="description" style="margin-top: 16px;">
+                            On this day, I stepped up to hosted a recipe-sharing application on AWS, leveraging CloudFront and S3 as the frontend, VPC and EC2 for the backend, and DynamoDB as the data store. It's a relatively simple task but it marked an important milestone in my learning and development as I explored the full potential of cloud services. This article outlines the deployment process for a recipe-sharing application using AWS CloudFormation templates.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="max-width: 920px; margin: 20px auto 0;">
+                    <p class="description" style="font-weight:700; margin: 0 0 8px 0;">Step-by-Step Implementation</p>
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Step 1: Configuring the Frontend</strong></p>
+                    <p class="description" style="margin: 0 0 10px 0;">
+                        Navigate to the CloudFormation console and select my template for http configuration.
+                    </p>
+                    <ul class="description" style="margin: 0 0 16px 18px;">
+                        <li><strong>Create Stack</strong></li>
+                        <li><strong>Choose "Upload a template file".</strong></li>
+                        <li><strong>Upload the selected YAML template</strong></li>
+                    </ul>
+                    <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/normal_67e810e379596.png" alt="CloudFormation stack creation" style="width:100%; height:auto; display:block;">
+                    </div>
+                </div>
+
+                <div style="max-width: 920px; margin: 20px auto 0;">
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Step 2: Configure Stack details</strong></p>
+                    <ul class="description" style="margin: 0 0 16px 18px;">
+                        <li><strong>Provide a Stack name</strong></li>
+                    </ul>
+                    <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/normal_67e8112206888.png" alt="Configure Stack details" style="width:100%; height:auto; display:block;">
+                    </div>
+                </div>
+
+                <div style="max-width: 920px; margin: 20px auto 0;">
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Step 3: Review and Deploy</strong></p>
+                    <ul class="description" style="margin: 0 0 16px 18px;">
+                        <li>Review the stack configuration for accuracy.</li>
+                        <li>Acknowledge that CloudFormation may create IAM resources.</li>
+                        <li>Click "Create stack" to initiate the deployment process.</li>
+                        <li><strong>Wait until the stack status changes to "CREATE_COMPLETE".</strong></li>
+                    </ul>
+                    <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/normal_67e8117cb99cd.png" alt="Review and Deploy stack" style="width:100%; height:auto; display:block;">
+                    </div>
+                    <p class="description" style="margin: 16px 0 0 0;">
+                        <strong>The CloudFormation template provisions the following resources for the applications frontend, backend, and data storage:</strong>
+                    </p>
+                    <ul class="description" style="margin: 8px 0 16px 18px;">
+                        <li><strong>Frontend:</strong> Amazon S3, Amazon CloudFront</li>
+                        <li><strong>Backend:</strong> Public EC2 instance</li>
+                        <li><strong>Data Store:</strong> Amazon DynamoDB, which provides a fully managed NoSQL database to store and retrieve saved recipes efficiently.</li>
+                    </ul>
+                </div>
+
+                <div style="max-width: 920px; margin: 20px auto 0;">
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Step 4: Preparing the Application Files</strong></p>
+                    <p class="description" style="margin: 0 0 10px 0;">
+                        The configuration file contains the variables below:
+                    </p>
+                    <ul class="description" style="margin: 0 0 12px 18px;">
+                        <li>CONFIG_MAX_INGREDIENTS</li>
+                        <li>CONFIG_MAX_STEPS</li>
+                        <li>CONFIG_MAX_RECIPES</li>
+                        <li>CONFIG_USER_PAGE_TITLE</li>
+                        <li>CONFIG_ADMIN_PAGE_TITLE</li>
+                        <li>CONFIG_appConfig</li>
+                        <li>API_URL</li>
+                    </ul>
+                    <p class="description" style="margin: 0 0 16px 0;">
+                        Update API_URL to match the deployed API endpoint
+                    </p>
+                    <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/normal_67e812367dcbc.png" alt="Preparing the Application Files" style="width:100%; height:auto; display:block;">
+                    </div>
+                </div>
+
+                <div style="max-width: 920px; margin: 20px auto 0;">
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Step 5: Deploying the Frontend</strong></p>
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Build the Application</strong></p>
+                    <p class="description" style="margin: 0 0 10px 0;">
+                        Once the configurations are set, you'll need to build the frontend. Run the build command for your React application
+                    </p>
+                    <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 16px; overflow-x: auto; margin: 0 0 16px 0;">
+                        <pre style="margin:0; color: var(--text-white);"><code>npm install && npm run build</code></pre>
+                    </div>
+                    <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/normal_67e8127664834.png" alt="Deploying the Frontend" style="width:100%; height:auto; display:block;">
+                    </div>
+                    <p class="description" style="margin: 12px 0 0 0;">
+                        A /build or /dist folder is created with the compiled application files.
+                    </p>
+                    <p class="description" style="margin: 12px 0 0 0; font-weight:700;">Verify the Build Files</p>
+                    <p class="description" style="margin: 4px 0 0 0;">
+                        Check and ensure the dist folder contain all necessary files for deployment.
+                    </p>
+                </div>
+
+                <div style="max-width: 920px; margin: 20px auto 0;">
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Step 6: Uploading to S3</strong></p>
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Navigate to the S3 Console</strong></p>
+                    <ul class="description" style="margin: 0 0 12px 18px;">
+                        <li>Open the S3 Console</li>
+                        <li>Locate the bucket created by the CloudFormation stack</li>
+                    </ul>
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Upload the Files</strong></p>
+                    <ul class="description" style="margin: 0 0 16px 18px;">
+                        <li>Select the contents of the /dist folder's contents and upload them to the S3 bucket.</li>
+                    </ul>
+                    <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/normal_67e812daef0d0.png" alt="Uploading to S3" style="width:100%; height:auto; display:block;">
+                    </div>
+                </div>
+
+                <div style="max-width: 920px; margin: 20px auto 0;">
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Step 7: Testing and Deployment</strong></p>
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Testing the Backend API</strong></p>
+                    <p class="description" style="margin: 0 0 10px 0;">
+                        Test interactions with the backend services to confirm that the API_URL is correctly configured. To test the API_URL, make requests to specific endpoints. <strong>In my case I used cURL to test the connectivity.</strong>
+                    </p>
+                    <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 16px; overflow-x: auto; margin: 0 0 16px 0;">
+                        <pre style="margin:0; color: var(--text-white);"><code>$ curl -i 'https://api.awscloudprojects.site/recipes'</code></pre>
+                    </div>
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Testing the Frontend</strong></p>
+                    <ul class="description" style="margin: 0 0 16px 18px;">
+                        <li>Navigate to AWS CloudFront Console.</li>
+                        <li>Copy the CloudFront distribution URL.</li>
+                        <li>Paste the URL into a web browser to access the application.</li>
+                    </ul>
+                    <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/normal_67e813273adc7.png" alt="Testing and Deployment" style="width:100%; height:auto; display:block;">
+                    </div>
+                    <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5); margin-top: 12px;">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/normal_67e813434ec84.png" alt="Testing and Deployment - additional view" style="width:100%; height:auto; display:block;">
+                    </div>
+                </div>
+
+                <div style="max-width: 920px; margin: 30px auto 0;">
+                    <p class="description" style="font-weight:700; margin: 0 0 8px 0;">What I Learned Along the Way</p>
+                    <ul class="description" style="margin: 0 0 16px 18px;">
+                        <li>The few hurdles on this journey taught me more about cloud architecture and the importance of paying attention to detail.</li>
+                        <li>Whether I used http or https configurations, the resulting infrastructure is tailored to meet my application's specific needs.</li>
+                    </ul>
+                </div>
+
+                <div style="max-width: 920px; margin: 30px auto 60px;">
+                    <p class="description" style="font-weight:700; margin: 0 0 8px 0;">Conclusion</p>
+                    <p class="description" style="margin: 0 0 0 0;">
+                        This second milestone has been an exciting one in my journey in cloud. I look forward to exploring more AWS services, building more simple systems to complex systems, and expand my knowledge of cloud-based technologies.
+                    </p>
+                    <p class="description" style="margin: 12px 0 0 0;">
+                        Let's connect and share ideas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <style>
+        /* Mobile optimizations for project detail page */
+        @media (max-width: 768px) {
+            .projects-content > div[style*="max-width: 920px"] {
+                max-width: 100% !important;
+                padding: 0 10px !important;
+            }
+            
+            .hero-content[style*="max-width: 920px"] {
+                max-width: 100% !important;
+                padding: 0 10px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .projects-content > div[style*="max-width: 920px"] {
+                padding: 0 5px !important;
+            }
+            
+            .hero-content[style*="max-width: 920px"] {
+                padding: 0 5px !important;
+            }
+        }
+    </style>
+</body>
+</html>
+

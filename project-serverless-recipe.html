@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project: Hosting a Serverless Recipe-Sharing Application</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <span class="logo-text">Christabel</span>
+                </div>
+                <nav class="nav-menu" id="navMenu">
+                    <a href="index.html" class="nav-link">HOME</a>
+                    <a href="about.html" class="nav-link">ABOUT</a>
+                    <a href="service.html" class="nav-link">SERVICE</a>
+                    <a href="projects.html" class="nav-link active">PROJECTS</a>
+                    <a href="contact.html" class="nav-link">CONTACT</a>
+                </nav>
+                <button class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Project Detail Section -->
+    <section class="projects-section">
+        <div class="hero-background">
+            <div class="gradient-shape shape-1"></div>
+            <div class="gradient-shape shape-2"></div>
+            <div class="gradient-shape shape-3"></div>
+        </div>
+        <div class="container">
+            <div class="projects-content">
+                <h1 class="projects-title">HOSTING A SERVERLESS RECIPE-SHARING APPLICATION</h1>
+                <div style="text-align:center; margin-top:-10px;">
+                    <span style="font-size:18px; letter-spacing:6px;">&#8226;&#8226;&#8226;</span>
+                </div>
+                <p style="text-align:center; margin-top:10px; opacity:0.8; font-size:12px;">4 min read</p>
+                <div style="text-align:center; margin-top:20px; margin-bottom:20px;">
+                    <a href="projects.html" class="cta-button"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+                </div>
+
+                <div class="hero-content" style="grid-template-columns: 1fr; gap: 20px; max-width: 920px; margin: 0 auto;">
+                    <div class="hero-image" style="margin: 0 auto; max-width: 920px;">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/800_67e8170f62cbe.png" alt="Hosting a Serverless Recipe-Sharing Application" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
+                    </div>
+                    <div class="hero-text" style="max-width: 920px; margin: 0 auto;">
+                        <p class="description" style="margin-top: 16px;">
+                            On this day, I stepped up to host a serverless recipe-sharing application on AWS, leveraging CloudFront and Amazon S3 as the frontend, API Gateway and AWS Lambda for the backend, Amazon Cognito for authentication and DynamoDB as the data store. This article outlines the deployment process for a serverless recipe-sharing application using AWS CloudFormation templates. We'll delve into the HTTP deployment option and discuss the components it creates to support both frontend and backend functionalities.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="max-width: 920px; margin: 20px auto 0;">
+                    <p class="description" style="font-weight:700; margin: 0 0 8px 0;">Hosting the Static Website</p>
+                    <p class="description" style="margin: 0 0 16px 0;">
+                        A step-by-step look at how I set up my recipe-sharing application using the http deployment:
+                    </p>
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Step 1: Deploying the CloudFormation Template</strong></p>
+                    <p class="description" style="margin: 0 0 10px 0;">
+                        Navigate to the CloudFormation console.
+                    </p>
+                    <ul class="description" style="margin: 0 0 16px 18px;">
+                        <li>Create Stack.</li>
+                        <li>Select "Choose an existing template".</li>
+                        <li>Select "Upload a template file".</li>
+                        <li>Upload the YAML template.</li>
+                    </ul>
+                </div>
+
+                <div style="max-width: 920px; margin: 20px auto 0;">
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Step 2: Configure Stack details</strong></p>
+                    <ul class="description" style="margin: 0 0 16px 18px;">
+                        <li>Configure the stack parameters</li>
+                    </ul>
+                </div>
+
+                <div style="max-width: 920px; margin: 20px auto 0;">
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Step 3: Review and Deploy</strong></p>
+                    <ul class="description" style="margin: 0 0 16px 18px;">
+                        <li>Review the stack configuration for accuracy.</li>
+                        <li>Acknowledge that CloudFormation may create IAM resources.</li>
+                        <li>Click "Create stack" to initiate the deployment process.</li>
+                        <li>Wait until the stack status changes to "CREATE_COMPLETE".</li>
+                    </ul>
+                    <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/normal_67e81595edbaf.png" alt="Review and Deploy stack" style="width:100%; height:auto; display:block;">
+                    </div>
+                </div>
+
+                <div style="max-width: 920px; margin: 20px auto 0;">
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Step 4: Configuring and Deploying the Frontend</strong></p>
+                    <p class="description" style="margin: 0 0 10px 0;">
+                        The two configuration files used aws-exports.ts and config.tsx is to configure the aunthentication with data from the Cognito user pool and configure application, namely the API URL respectively.
+                    </p>
+                    <p class="description" style="margin: 0 0 10px 0;">
+                        The two files are in details below:
+                    </p>
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>aws-export.ts</strong></p>
+                    <p class="description" style="margin: 0 0 10px 0;">
+                        This file is composed of four configuration variables:
+                    </p>
+                    <ul class="description" style="margin: 0 0 12px 18px;">
+                        <li><strong>AWS_PROJECT_REGION:</strong> The region you deployed your solution</li>
+                        <li><strong>AWS_COGNITO_REGION:</strong> Your Cognito user Pool region</li>
+                        <li><strong>AWS_USER_POOLS_ID:</strong> The ID of your user pool</li>
+                        <li><strong>AWS_USER_POOLS_WEB_CLIENT_ID:</strong> The client ID of your Cognito User Pool application</li>
+                    </ul>
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>configs.tsx</strong></p>
+                    <ul class="description" style="margin: 0 0 12px 18px;">
+                        <li><strong>CONFIG_API_URL:</strong> HttpAPI endpoint</li>
+                    </ul>
+                    <p class="description" style="margin: 0 0 16px 0;">
+                        Update the configuration files with the retrieved values from the Outputs Tab and save the changes.
+                    </p>
+                </div>
+
+                <div style="max-width: 920px; margin: 20px auto 0;">
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Step 5: Install dependencies and build the Frontend</strong></p>
+                    <p class="description" style="margin: 0 0 10px 0;">
+                        Once the configurations are set, you'll need to prepare the application files for deployment by initiating the build process to transform the code into a web-ready bundle that can be served to bowsers.
+                    </p>
+                    <p class="description" style="margin: 0 0 10px 0;">
+                        Run the build command for the application in the root of the folder that contains the files.
+                    </p>
+                    <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 16px; overflow-x: auto; margin: 0 0 16px 0;">
+                        <pre style="margin:0; color: var(--text-white);"><code>npm install && npm run build</code></pre>
+                    </div>
+                    <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/normal_67e815d7f1727.png" alt="Install dependencies and build the Frontend" style="width:100%; height:auto; display:block;">
+                    </div>
+                    <p class="description" style="margin: 12px 0 0 0;">
+                        A /dist folder is created with the compiled application files. The folder name may but is typically /build or /dist.
+                    </p>
+                    <p class="description" style="margin: 12px 0 0 0; font-weight:700;">Verify the Build Files</p>
+                    <p class="description" style="margin: 4px 0 0 0;">
+                        Check and ensure the dist folder contain all necessary files for deployment.
+                    </p>
+                </div>
+
+                <div style="max-width: 920px; margin: 20px auto 0;">
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Step 6: Uploading to S3</strong></p>
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Navigate to the S3 Console</strong></p>
+                    <ul class="description" style="margin: 0 0 12px 18px;">
+                        <li>Open the S3 Console.</li>
+                        <li>Locate the bucket created by the CloudFormation stack [the bucket name follows the naming convention defined in the template].</li>
+                        <li>Click Upload.</li>
+                        <li>Select the contents of the /dist folder's contents.</li>
+                        <li>Click Add Folder and select the assets/ folder.</li>
+                        <li>Click Upload to finalize the process</li>
+                    </ul>
+                    <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/normal_67e8160996ea2.png" alt="Uploading to S3" style="width:100%; height:auto; display:block;">
+                    </div>
+                </div>
+
+                <div style="max-width: 920px; margin: 20px auto 0;">
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Step 7: Accessing the Application</strong></p>
+                    <p class="description" style="margin: 0 0 10px 0;">
+                        To access the deployed application, retrieve the CloudFront URL:
+                    </p>
+                    <ol class="description" style="margin: 0 0 16px 18px; padding-left: 18px;">
+                        <li>Go to the CloudFront console at https://console.aws.amazon.com/cloudfront/.</li>
+                        <li>Click on Distributions on the left menu.</li>
+                        <li>Select the distribution you created.</li>
+                        <li>Copy the Distribution domain name value from the Details section.</li>
+                        <li>Paste the URL into your browser to access the application</li>
+                    </ol>
+                    <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/normal_67e8165d88d82.png" alt="Accessing the Application" style="width:100%; height:auto; display:block;">
+                    </div>
+                </div>
+
+                <div style="max-width: 920px; margin: 20px auto 0;">
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Step 8: Testing Authentication and User Management</strong></p>
+                    <p class="description" style="margin: 0 0 10px 0;">
+                        This application includes authentication via Amazon Cognito.
+                    </p>
+                    <ul class="description" style="margin: 0 0 16px 18px;">
+                        <li>Navigate to the Admin Page.</li>
+                        <li>Enter your credentials received via email:
+                            <ul style="margin: 8px 0 0 18px;">
+                                <li>Username (defined in the CloudFormation parameters)</li>
+                                <li>Temporary password</li>
+                            </ul>
+                        </li>
+                        <li>Update your password when prompted.</li>
+                        <li>Verify your email address using the verification code received.</li>
+                        <li>Once authenticated, explore the Admin Console</li>
+                    </ul>
+                    <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/normal_67e81680715e7.png" alt="Testing Authentication and User Management" style="width:100%; height:auto; display:block;">
+                    </div>
+                </div>
+
+                <div style="max-width: 920px; margin: 20px auto 0;">
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Step 9: Exploring Backend API Functionality</strong></p>
+                    <ul class="description" style="margin: 0 0 16px 18px;">
+                        <li>Navigate to the API Gateway Console</li>
+                        <li>Select your deployed API.</li>
+                        <li>Click Integrations from the left menu.</li>
+                        <li>Explore different API routes such as DELETE /recipes/{recipe_id}.</li>
+                        <li>Click on the Lambda function linked to a route to inspect its logic.</li>
+                    </ul>
+                    <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/normal_67e8169f12fb3.png" alt="Exploring Backend API Functionality" style="width:100%; height:auto; display:block;">
+                    </div>
+                </div>
+
+                <div style="max-width: 920px; margin: 20px auto 0;">
+                    <p class="description" style="margin: 0 0 8px 0;"><strong>Step 10: Securing API Endpoints with Cognito Authorization</strong></p>
+                    <ul class="description" style="margin: 0 0 12px 18px;">
+                        <li>Navigate to API Gateway Console.</li>
+                        <li>Select your API.</li>
+                        <li>Click Authorization from the left menu.</li>
+                        <li>Verify that routes requiring authentication have the JWT Auth authorizer enabled.</li>
+                        <li>Test an authenticated request by including the access token:</li>
+                    </ul>
+                    <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 16px; overflow-x: auto; margin: 0 0 16px 0;">
+                        <pre style="margin:0; color: var(--text-white);"><code>curl -i -H "Authorization: Bearer YOUR_ACCESS_TOKEN" YOUR_API_URL/auth</code></pre>
+                    </div>
+                    <div style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.5);">
+                        <img src="https://files.cdn-files-a.com/uploads/9157782/normal_67e816c01eca5.png" alt="Securing API Endpoints with Cognito Authorization" style="width:100%; height:auto; display:block;">
+                    </div>
+                </div>
+
+                <div style="max-width: 920px; margin: 30px auto 0;">
+                    <p class="description" style="font-weight:700; margin: 0 0 8px 0;">What I Learned Along the Way</p>
+                    <ul class="description" style="margin: 0 0 16px 18px;">
+                        <li>The few hurdles on this journey taught me more about cloud architecture and the importance of paying attention to detail.</li>
+                        <li>Leveraging the automation and scalability of these AWS Services (CloudFront, S3, and DynamoDB) ensured a reliable and user-friendly platform.</li>
+                    </ul>
+                </div>
+
+                <div style="max-width: 920px; margin: 30px auto 60px;">
+                    <p class="description" style="font-weight:700; margin: 0 0 8px 0;">Conclusion</p>
+                    <p class="description" style="margin: 0 0 0 0;">
+                        This milestone has been an exciting one on my journey. I look forward to exploring more AWS services, building more simple systems to complex systems, and expanding my knowledge of cloud-based technologies. Let's connect and share ideas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <style>
+        /* Mobile optimizations for project detail page */
+        @media (max-width: 768px) {
+            .projects-content > div[style*="max-width: 920px"] {
+                max-width: 100% !important;
+                padding: 0 10px !important;
+            }
+            
+            .hero-content[style*="max-width: 920px"] {
+                max-width: 100% !important;
+                padding: 0 10px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .projects-content > div[style*="max-width: 920px"] {
+                padding: 0 5px !important;
+            }
+            
+            .hero-content[style*="max-width: 920px"] {
+                padding: 0 5px !important;
+            }
+        }
+    </style>
+</body>
+</html>
+
