@@ -22,6 +22,39 @@ body {
     font-size: 17px; /* 16-18px range for body text */
     line-height: 1.65; /* 1.5-1.7 range */
     font-weight: 400;
+    position: relative;
+}
+
+/* Desktop Background Enhancement (screens wider than 768px) */
+@media (min-width: 769px) {
+    body {
+        /* Elegant gradient background with subtle blue tones */
+        background: 
+            /* Very subtle dot pattern overlay */
+            radial-gradient(circle at 2px 2px, rgba(10, 116, 218, 0.02) 1px, transparent 0),
+            /* Soft radial gradients for visual interest */
+            radial-gradient(ellipse 1200px 800px at 10% 20%, rgba(10, 116, 218, 0.06) 0%, transparent 50%),
+            radial-gradient(ellipse 1000px 700px at 90% 80%, rgba(10, 116, 218, 0.04) 0%, transparent 50%),
+            /* Main diagonal gradient */
+            linear-gradient(135deg, #f5f7fa 0%, #ffffff 30%, #f8f9fb 60%, #ffffff 100%);
+        background-size: 50px 50px, cover, cover, cover;
+        background-attachment: fixed;
+        background-position: 0 0, top left, bottom right, center;
+        position: relative;
+        min-height: 100vh;
+    }
+    
+    /* Ensure all content sections are properly layered */
+    .hero,
+    .about-section,
+    .services-section,
+    .projects-section,
+    .education-section,
+    .training-section,
+    .contact-section {
+        position: relative;
+        z-index: 1;
+    }
 }
 
 /* Heading Fonts */
@@ -1537,7 +1570,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .project-name {
-    font-size: 24px; /* 22-26px range for H3 */
+    font-size: 18px; /* Further reduced from 20px for better card proportions */
     font-weight: 700;
     color: var(--heading-dark);
     line-height: 1.6; /* 1.5-1.7 range */
@@ -1548,7 +1581,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .project-description {
-    font-size: 17px; /* 16-18px range for body text */
+    font-size: 14px; /* Further reduced from 15px for better card proportions */
     color: var(--text-dark);
     opacity: 0.85;
     line-height: 1.65; /* 1.5-1.7 range */
@@ -1620,13 +1653,13 @@ h1, h2, h3, h4, h5, h6,
     }
     
     .project-name {
-        font-size: 20px; /* 18-20px range for mobile H3 */
+        font-size: 16px; /* Further reduced from 18px for better card proportions */
         margin: 20px 25px 15px 25px;
         line-height: 1.6; /* 1.5-1.7 range */
     }
     
     .project-description {
-        font-size: 15px;
+        font-size: 13px; /* Further reduced from 14px for better card proportions */
         line-height: 1.7;
         margin: 0 25px 30px 25px;
     }
@@ -2150,18 +2183,28 @@ img {
     
     /* Better title sizes with proper spacing */
     .service-title,
-    .project-name,
     .cert-title {
         font-size: 18px;
         margin-bottom: 18px;
         line-height: 1.4;
     }
     
+    .project-name {
+        font-size: 15px; /* Further reduced from 16px for project cards */
+        margin-bottom: 18px;
+        line-height: 1.4;
+    }
+    
     /* Better description text with proper spacing */
     .service-description,
-    .project-description,
     .cert-description {
         font-size: 15px;
+        line-height: 1.7;
+        margin-bottom: 0;
+    }
+    
+    .project-description {
+        font-size: 13px; /* Further reduced from 14px for project cards */
         line-height: 1.7;
         margin-bottom: 0;
     }
