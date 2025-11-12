@@ -5,13 +5,13 @@
 }
 
 :root {
-    --primary-gradient: linear-gradient(135deg, #0a74da, #0066cc, #0052a3);
+    --primary-gradient: linear-gradient(135deg, #007bff, #0056d6, #0047b3);
     --light-bg: #f8f8f8;
     --white-bg: #ffffff;
     --text-dark: #222222;
     --heading-dark: #111111;
-    --accent-blue: #0a74da;
-    --accent-blue-dark: #0066cc;
+    --accent-blue: #007bff;
+    --accent-blue-dark: #0056d6;
 }
 
 body {
@@ -30,11 +30,11 @@ body {
     body {
         /* Elegant gradient background with subtle blue tones */
         background: 
-            /* Very subtle dot pattern overlay */
-            radial-gradient(circle at 2px 2px, rgba(10, 116, 218, 0.02) 1px, transparent 0),
-            /* Soft radial gradients for visual interest */
-            radial-gradient(ellipse 1200px 800px at 10% 20%, rgba(10, 116, 218, 0.06) 0%, transparent 50%),
-            radial-gradient(ellipse 1000px 700px at 90% 80%, rgba(10, 116, 218, 0.04) 0%, transparent 50%),
+            /* Enhanced dot pattern overlay */
+            radial-gradient(circle at 2px 2px, rgba(0, 123, 255, 0.04) 1px, transparent 0),
+            /* More vibrant radial gradients for visual interest */
+            radial-gradient(ellipse 1200px 800px at 10% 20%, rgba(0, 123, 255, 0.12) 0%, transparent 50%),
+            radial-gradient(ellipse 1000px 700px at 90% 80%, rgba(0, 123, 255, 0.08) 0%, transparent 50%),
             /* Main diagonal gradient */
             linear-gradient(135deg, #f5f7fa 0%, #ffffff 30%, #f8f9fb 60%, #ffffff 100%);
         background-size: 50px 50px, cover, cover, cover;
@@ -237,7 +237,7 @@ h1, h2, h3, h4, h5, h6,
 .shape-1 {
     width: 500px;
     height: 500px;
-    background: linear-gradient(135deg, rgba(10, 116, 218, 0.1), rgba(0, 102, 204, 0.08));
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.18), rgba(0, 86, 214, 0.14));
     top: -200px;
     right: -100px;
     animation-delay: 0s;
@@ -246,7 +246,7 @@ h1, h2, h3, h4, h5, h6,
 .shape-2 {
     width: 400px;
     height: 400px;
-    background: linear-gradient(135deg, rgba(0, 102, 204, 0.08), rgba(0, 82, 163, 0.06));
+    background: linear-gradient(135deg, rgba(0, 86, 214, 0.14), rgba(0, 71, 179, 0.10));
     bottom: -150px;
     left: -100px;
     animation-delay: 5s;
@@ -255,7 +255,7 @@ h1, h2, h3, h4, h5, h6,
 .shape-3 {
     width: 300px;
     height: 300px;
-    background: linear-gradient(135deg, rgba(10, 116, 218, 0.08), rgba(0, 102, 204, 0.06));
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.15), rgba(0, 86, 214, 0.12));
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -724,7 +724,7 @@ h1, h2, h3, h4, h5, h6,
     background: var(--accent-blue);
     color: var(--white-bg);
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(10, 116, 218, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 123, 255, 0.4);
 }
 
 /* Responsive About Section */
@@ -1386,7 +1386,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .it-icon {
-    background: linear-gradient(135deg, #0066cc, #00a8ff);
+    background: linear-gradient(135deg, #0056d6, #007bff);
 }
 
 .data-icon {
