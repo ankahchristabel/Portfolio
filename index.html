@@ -377,6 +377,327 @@
 
     <script src="script.js"></script>
     <script>
+        // Screen Size Detection and Quick Layout Adjustment
+        (function() {
+            'use strict';
+            
+            const BREAKPOINTS = {
+                smallMobile: 375,  // Samsung Galaxy and similar small screens
+                mobile: 480,
+                tablet: 768,
+                desktop: 968
+            };
+            
+            function getScreenInfo() {
+                const width = window.innerWidth || document.documentElement.clientWidth;
+                return {
+                    width: width,
+                    isSmallMobile: width <= BREAKPOINTS.smallMobile,
+                    isMobile: width <= BREAKPOINTS.mobile,
+                    isTablet: width > BREAKPOINTS.mobile && width <= BREAKPOINTS.tablet,
+                    isDesktop: width > BREAKPOINTS.tablet,
+                    orientation: window.innerWidth > window.innerHeight ? 'landscape' : 'portrait'
+                };
+            }
+            
+            function adjustLayouts() {
+                const screen = getScreenInfo();
+                
+                // Prevent horizontal scroll on all devices
+                document.body.style.overflowX = 'hidden';
+                document.documentElement.style.overflowX = 'hidden';
+                document.body.style.width = '100%';
+                document.body.style.maxWidth = '100%';
+                document.documentElement.style.width = '100%';
+                document.documentElement.style.maxWidth = '100%';
+                
+                // Adjust main container padding (critical for small screens)
+                const containers = document.querySelectorAll('.container');
+                containers.forEach(container => {
+                    if (screen.isSmallMobile) {
+                        container.style.paddingLeft = '12px';
+                        container.style.paddingRight = '12px';
+                        container.style.maxWidth = '100%';
+                    } else if (screen.isMobile) {
+                        container.style.paddingLeft = '15px';
+                        container.style.paddingRight = '15px';
+                    } else {
+                        container.style.paddingLeft = '';
+                        container.style.paddingRight = '';
+                    }
+                });
+                
+                // Adjust hero section grid
+                const heroContent = document.querySelector('.hero-content');
+                if (heroContent) {
+                    if (screen.isTablet || screen.isMobile) {
+                        heroContent.style.gridTemplateColumns = '1fr';
+                        heroContent.style.textAlign = 'center';
+                        heroContent.style.gap = screen.isSmallMobile ? '30px' : '40px';
+                        heroContent.style.paddingLeft = '0';
+                        heroContent.style.paddingRight = '0';
+                    } else {
+                        heroContent.style.gridTemplateColumns = '1fr 1fr';
+                        heroContent.style.textAlign = 'left';
+                        heroContent.style.gap = '60px';
+                    }
+                }
+                
+                // Adjust hero text padding
+                const heroText = document.querySelector('.hero-text');
+                if (heroText && screen.isSmallMobile) {
+                    heroText.style.paddingLeft = '0';
+                    heroText.style.paddingRight = '0';
+                    heroText.style.maxWidth = '100%';
+                }
+                
+                // Adjust main title font size
+                const mainTitle = document.querySelector('.main-title');
+                if (mainTitle) {
+                    if (screen.isSmallMobile) {
+                        mainTitle.style.fontSize = '24px';
+                        mainTitle.style.paddingLeft = '0';
+                        mainTitle.style.paddingRight = '0';
+                    } else if (screen.isMobile) {
+                        mainTitle.style.fontSize = '28px';
+                    } else if (screen.isTablet) {
+                        mainTitle.style.fontSize = '32px';
+                    } else {
+                        mainTitle.style.fontSize = '44px';
+                    }
+                }
+                
+                // Adjust description text
+                const descriptions = document.querySelectorAll('.description');
+                descriptions.forEach(desc => {
+                    if (screen.isSmallMobile) {
+                        desc.style.paddingLeft = '0';
+                        desc.style.paddingRight = '0';
+                    }
+                });
+                
+                // Adjust portrait image size
+                const portraitWrapper = document.querySelector('.portrait-wrapper');
+                if (portraitWrapper) {
+                    if (screen.isSmallMobile) {
+                        portraitWrapper.style.width = '220px';
+                        portraitWrapper.style.height = '280px';
+                    } else if (screen.isMobile) {
+                        portraitWrapper.style.width = '240px';
+                        portraitWrapper.style.height = '300px';
+                    } else if (screen.isTablet) {
+                        portraitWrapper.style.width = '280px';
+                        portraitWrapper.style.height = '360px';
+                    } else {
+                        portraitWrapper.style.width = '400px';
+                        portraitWrapper.style.height = '500px';
+                    }
+                }
+                
+                // Adjust image circle
+                const imageCircle = document.querySelector('.image-circle');
+                if (imageCircle && screen.isSmallMobile) {
+                    imageCircle.style.width = '260px';
+                    imageCircle.style.height = '260px';
+                }
+                
+                // Adjust contact wrapper grid (if contact section exists)
+                const contactWrapper = document.querySelector('.contact-wrapper');
+                if (contactWrapper) {
+                    if (screen.isTablet || screen.isMobile) {
+                        contactWrapper.style.gridTemplateColumns = '1fr';
+                        contactWrapper.style.gap = screen.isSmallMobile ? '30px' : '40px';
+                        contactWrapper.style.marginLeft = '0';
+                        contactWrapper.style.marginRight = '0';
+                    } else {
+                        contactWrapper.style.gridTemplateColumns = '1fr 1fr';
+                        contactWrapper.style.gap = '60px';
+                    }
+                }
+                
+                // Adjust contact content padding
+                const contactContent = document.querySelector('.contact-content');
+                if (contactContent) {
+                    if (screen.isSmallMobile) {
+                        contactContent.style.paddingLeft = '0';
+                        contactContent.style.paddingRight = '0';
+                        contactContent.style.maxWidth = '100%';
+                    } else if (screen.isMobile) {
+                        contactContent.style.paddingLeft = '15px';
+                        contactContent.style.paddingRight = '15px';
+                    } else if (screen.isTablet) {
+                        contactContent.style.paddingLeft = '30px';
+                        contactContent.style.paddingRight = '30px';
+                    } else {
+                        contactContent.style.paddingLeft = '40px';
+                        contactContent.style.paddingRight = '40px';
+                    }
+                }
+                
+                // Adjust contact title font size
+                const contactTitle = document.querySelector('.contact-title');
+                if (contactTitle) {
+                    if (screen.isSmallMobile) {
+                        contactTitle.style.fontSize = '22px';
+                        contactTitle.style.paddingLeft = '0';
+                        contactTitle.style.paddingRight = '0';
+                    } else if (screen.isMobile) {
+                        contactTitle.style.fontSize = '24px';
+                    } else if (screen.isTablet) {
+                        contactTitle.style.fontSize = '24px';
+                    } else {
+                        contactTitle.style.fontSize = '30px';
+                    }
+                }
+                
+                // Adjust form grid (name/phone)
+                const namePhoneGrid = document.querySelector('.contact-form > div[style*="grid-template-columns"]');
+                if (namePhoneGrid) {
+                    if (screen.isTablet || screen.isMobile) {
+                        namePhoneGrid.style.gridTemplateColumns = '1fr';
+                        namePhoneGrid.style.gap = screen.isSmallMobile ? '15px' : '18px';
+                        namePhoneGrid.style.marginLeft = '0';
+                        namePhoneGrid.style.marginRight = '0';
+                    } else {
+                        namePhoneGrid.style.gridTemplateColumns = '1fr 1fr';
+                        namePhoneGrid.style.gap = '20px';
+                    }
+                }
+                
+                // Adjust form wrapper padding
+                const contactForm = document.querySelector('.contact-form');
+                if (contactForm) {
+                    if (screen.isSmallMobile) {
+                        contactForm.style.paddingLeft = '0';
+                        contactForm.style.paddingRight = '0';
+                    }
+                }
+                
+                // Adjust input/textarea sizes (prevent iOS zoom + fit small screens)
+                const inputs = document.querySelectorAll('.contact-form input, .contact-form textarea');
+                inputs.forEach(input => {
+                    if (screen.isSmallMobile) {
+                        input.style.fontSize = '16px';
+                        input.style.padding = '14px 12px';
+                        input.style.width = '100%';
+                        input.style.boxSizing = 'border-box';
+                        input.style.marginLeft = '0';
+                        input.style.marginRight = '0';
+                    } else if (screen.isMobile) {
+                        input.style.fontSize = '16px';
+                        input.style.padding = '15px 15px';
+                        input.style.width = '100%';
+                        input.style.boxSizing = 'border-box';
+                    } else {
+                        input.style.fontSize = '15px';
+                        input.style.padding = '14px 16px';
+                    }
+                });
+                
+                // Adjust contact button
+                const contactBtn = document.getElementById('contact-us-btn');
+                if (contactBtn) {
+                    if (screen.isSmallMobile) {
+                        contactBtn.style.width = '100%';
+                        contactBtn.style.padding = '15px 20px';
+                        contactBtn.style.fontSize = '14px';
+                        contactBtn.style.marginLeft = '0';
+                        contactBtn.style.marginRight = '0';
+                    } else if (screen.isMobile) {
+                        contactBtn.style.width = '100%';
+                        contactBtn.style.padding = '16px 24px';
+                        contactBtn.style.fontSize = '14px';
+                    } else {
+                        contactBtn.style.width = 'auto';
+                        contactBtn.style.padding = '16px 32px';
+                        contactBtn.style.fontSize = '15px';
+                    }
+                }
+                
+                // Adjust error messages
+                const errorMessages = document.querySelectorAll('.error-message');
+                errorMessages.forEach(error => {
+                    if (screen.isSmallMobile) {
+                        error.style.fontSize = '11px';
+                        error.style.paddingLeft = '0';
+                        error.style.paddingRight = '0';
+                    }
+                });
+                
+                // Adjust contact info section (left side)
+                const contactInfo = document.querySelector('.contact-info');
+                if (contactInfo) {
+                    if (screen.isSmallMobile) {
+                        contactInfo.style.paddingLeft = '0';
+                        contactInfo.style.paddingRight = '0';
+                    }
+                }
+                
+                // Adjust contact details text
+                const contactDetails = document.querySelectorAll('.contact-detail');
+                contactDetails.forEach(detail => {
+                    if (screen.isSmallMobile) {
+                        detail.style.paddingLeft = '0';
+                        detail.style.paddingRight = '0';
+                        detail.style.marginLeft = '0';
+                        detail.style.marginRight = '0';
+                    }
+                });
+                
+                // Adjust social icons positioning
+                const socialIcons = document.querySelectorAll('.social-icons');
+                socialIcons.forEach(container => {
+                    if (screen.isTablet || screen.isMobile) {
+                        container.style.justifyContent = 'center';
+                        container.style.gap = screen.isSmallMobile ? '10px' : '12px';
+                        container.style.paddingLeft = '0';
+                        container.style.paddingRight = '0';
+                    } else {
+                        const isHeroSocial = container.classList.contains('hero-social-icons');
+                        container.style.justifyContent = isHeroSocial ? 'flex-start' : 'flex-start';
+                        container.style.gap = '15px';
+                    }
+                });
+                
+                // Ensure all sections fit within viewport
+                const sections = document.querySelectorAll('section');
+                sections.forEach(section => {
+                    if (screen.isSmallMobile) {
+                        section.style.paddingLeft = '0';
+                        section.style.paddingRight = '0';
+                        section.style.maxWidth = '100%';
+                        section.style.overflowX = 'hidden';
+                    }
+                });
+            }
+            
+            // Debounced resize handler for performance
+            let resizeTimeout;
+            function handleResize() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(adjustLayouts, 100);
+            }
+            
+            // Initialize on load
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', adjustLayouts);
+            } else {
+                adjustLayouts();
+            }
+            
+            // Listen for resize events
+            window.addEventListener('resize', handleResize, { passive: true });
+            
+            // Handle orientation changes (mobile devices)
+            window.addEventListener('orientationchange', () => {
+                setTimeout(adjustLayouts, 150);
+            });
+            
+            // Expose globally if needed
+            window.getScreenInfo = getScreenInfo;
+            window.adjustLayouts = adjustLayouts;
+        })();
+
         // Strict Regex Patterns
         const REGEX_PATTERNS = {
             name: /^[a-zA-Z\s\-'\.]{2,50}$/,  // Letters, spaces, hyphens, apostrophes, periods, 2-50 chars
@@ -795,28 +1116,12 @@
                 gap: 18px !important;
             }
 
-            /* Stack form fields vertically on tablets */
-            .contact-form > div[style*="grid-template-columns"] {
-                grid-template-columns: 1fr !important;
-                gap: 18px !important;
-            }
-
             input[type="text"],
             input[type="email"],
             input[type="tel"],
             textarea {
                 padding: 15px 18px !important;
-                font-size: 16px !important; /* Prevents zoom on iOS */
-                width: 100% !important;
-                box-sizing: border-box !important;
-            }
-
-            /* Error message styling for tablets */
-            .error-message {
-                font-size: 11px !important;
-                line-height: 1.4 !important;
-                word-wrap: break-word !important;
-                overflow-wrap: break-word !important;
+                font-size: 15px !important;
             }
 
             .social-icons {
@@ -909,28 +1214,12 @@
             input[type="tel"],
             textarea {
                 padding: 16px 18px !important;
-                font-size: 16px !important; /* Prevents zoom on iOS */
+                font-size: 16px !important;
                 border-radius: 10px !important;
-                width: 100% !important;
-                box-sizing: border-box !important;
             }
 
             textarea {
                 min-height: 140px !important;
-            }
-
-            /* Error message styling for mobile */
-            .error-message {
-                font-size: 11px !important;
-                line-height: 1.4 !important;
-                word-wrap: break-word !important;
-                overflow-wrap: break-word !important;
-                margin-top: 4px !important;
-                display: none !important;
-            }
-
-            .error-message[style*="block"] {
-                display: block !important;
             }
 
             #contact-us-btn {
