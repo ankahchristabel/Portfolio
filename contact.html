@@ -114,13 +114,25 @@
 
                     <!-- Right Side: Contact Form -->
                     <div class="contact-form-wrapper">
-                        <form class="contact-form" id="contact-form" style="display: flex; flex-direction: column; gap: 20px;">
+                        <form class="contact-form" id="contact-form" style="display: flex; flex-direction: column; gap: 20px;" novalidate>
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                                <input type="text" name="name" id="contact-name" placeholder="Name" required style="padding: 14px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: var(--text-white); font-size: 15px; font-family: inherit; outline: none; transition: all 0.3s ease;">
-                                <input type="tel" name="phone" id="contact-phone" placeholder="Phone" required style="padding: 14px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: var(--text-white); font-size: 15px; font-family: inherit; outline: none; transition: all 0.3s ease;">
+                                <div style="position: relative;">
+                                    <input type="text" name="name" id="contact-name" placeholder="Name" required pattern="^[a-zA-Z\s\-'\.]{2,50}$" style="padding: 14px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: var(--text-white); font-size: 15px; font-family: inherit; outline: none; transition: all 0.3s ease; width: 100%;">
+                                    <span class="error-message" id="name-error" style="display: none; color: #ff4444; font-size: 12px; margin-top: 5px;"></span>
+                                </div>
+                                <div style="position: relative;">
+                                    <input type="tel" name="phone" id="contact-phone" placeholder="Phone (e.g., +1234567890, (123) 456-7890)" required pattern="^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[(]?[0-9]{1,4}[)]?[-\s\.]?[0-9]{1,9}$" style="padding: 14px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: var(--text-white); font-size: 15px; font-family: inherit; outline: none; transition: all 0.3s ease; width: 100%;">
+                                    <span class="error-message" id="phone-error" style="display: none; color: #ff4444; font-size: 12px; margin-top: 5px;"></span>
+                                </div>
                             </div>
-                            <input type="email" name="email" id="contact-email" placeholder="Email address" required style="padding: 14px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: var(--text-white); font-size: 15px; font-family: inherit; outline: none; transition: all 0.3s ease;">
-                            <textarea name="message" id="contact-message" placeholder="Message" rows="6" required style="padding: 14px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: var(--text-white); font-size: 15px; font-family: inherit; outline: none; resize: vertical; transition: all 0.3s ease;"></textarea>
+                            <div style="position: relative;">
+                                <input type="email" name="email" id="contact-email" placeholder="Email address" required pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$" style="padding: 14px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: var(--text-white); font-size: 15px; font-family: inherit; outline: none; transition: all 0.3s ease; width: 100%;">
+                                <span class="error-message" id="email-error" style="display: none; color: #ff4444; font-size: 12px; margin-top: 5px;"></span>
+                            </div>
+                            <div style="position: relative;">
+                                <textarea name="message" id="contact-message" placeholder="Message (10-1000 characters)" rows="6" required minlength="10" maxlength="1000" style="padding: 14px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: var(--text-white); font-size: 15px; font-family: inherit; outline: none; resize: vertical; transition: all 0.3s ease; width: 100%;"></textarea>
+                                <span class="error-message" id="message-error" style="display: none; color: #ff4444; font-size: 12px; margin-top: 5px;"></span>
+                            </div>
                             <button type="button" id="contact-us-btn" style="padding: 16px 32px; background: #0066cc; color: var(--text-white); border: none; border-radius: 8px; font-size: 15px; font-weight: 600; letter-spacing: 1px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase;">
                                 CONTACT US
                             </button>
@@ -167,8 +179,26 @@
             background: rgba(255,255,255,0.08) !important;
         }
 
+        input.invalid, textarea.invalid {
+            border-color: #ff4444 !important;
+            background: rgba(255, 68, 68, 0.1) !important;
+        }
+
+        input.valid, textarea.valid {
+            border-color: #00cc66 !important;
+            background: rgba(0, 204, 102, 0.05) !important;
+        }
+
         input::placeholder, textarea::placeholder {
             color: rgba(255,255,255,0.5);
+        }
+
+        .error-message {
+            display: block !important;
+            color: #ff4444;
+            font-size: 12px;
+            margin-top: 5px;
+            font-family: inherit;
         }
 
         button:hover {
@@ -202,6 +232,26 @@
             .contact-content {
                 padding: 0 20px;
             }
+
+            /* Stack form fields vertically on tablets */
+            .contact-form > div[style*="grid-template-columns: 1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+                gap: 20px !important;
+            }
+
+            /* Better error message spacing */
+            .error-message {
+                font-size: 11px !important;
+                line-height: 1.4 !important;
+                word-wrap: break-word !important;
+            }
+
+            /* Input fields */
+            input, textarea {
+                font-size: 16px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
         }
 
         @media (max-width: 480px) {
@@ -218,31 +268,399 @@
                 grid-template-columns: 1fr;
                 gap: 15px;
             }
+
+            /* Stack form fields vertically on mobile */
+            .contact-form > div[style*="grid-template-columns: 1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+                gap: 20px !important;
+            }
+
+            /* Better spacing for error messages on mobile */
+            .error-message {
+                font-size: 11px !important;
+                line-height: 1.4 !important;
+                word-wrap: break-word !important;
+                margin-top: 4px !important;
+            }
+
+            /* Ensure inputs don't overflow on small screens */
+            input, textarea {
+                font-size: 16px !important; /* Prevents zoom on iOS */
+                width: 100% !important;
+                box-sizing: border-box !important;
+                padding: 14px 12px !important;
+            }
+
+            /* Adjust button for mobile */
+            #contact-us-btn {
+                width: 100% !important;
+                padding: 14px 24px !important;
+                font-size: 14px !important;
+            }
+
+            /* Better contact wrapper spacing on mobile */
+            .contact-wrapper {
+                gap: 30px !important;
+            }
         }
     </style>
     <script>
+        // STRICT REGEX PATTERNS - No exceptions allowed
+        const VALIDATION_PATTERNS = {
+            // Name: 2-50 characters, ONLY letters, spaces, hyphens, apostrophes (no consecutive special chars)
+            name: /^[a-zA-Z]+(?:[\s'-][a-zA-Z]+)*$/,
+            // Phone: International E.164 format - optional +, country code (1-3 digits), then 7-15 digits
+            phone: /^\+?[1-9]\d{6,14}$/,
+            // Email: Strict RFC 5322 compliant - local part + @ + domain + TLD (min 2 chars)
+            email: /^[a-zA-Z0-9](?:[a-zA-Z0-9._%+-]*[a-zA-Z0-9])?@[a-zA-Z0-9](?:[a-zA-Z0-9.-]*[a-zA-Z0-9])?\.[a-zA-Z]{2,}$/,
+            // Message: 10-1000 characters, no script tags or dangerous content
+            message: /^.{10,1000}$/
+        };
+
+        // Validation Messages
+        const VALIDATION_MESSAGES = {
+            name: {
+                empty: 'Name is required',
+                invalid: 'Name must be 2-50 characters. Only letters, single spaces, hyphens (-), and apostrophes (\') allowed. No consecutive special characters.',
+                pattern: 'Invalid format. Name must start and end with a letter, and contain only letters, spaces, hyphens, or apostrophes.'
+            },
+            phone: {
+                empty: 'Phone number is required',
+                invalid: 'Phone must be in international format: +[country code][7-15 digits] (e.g., +1234567890 or 1234567890). Only digits allowed after optional +.',
+                pattern: 'Invalid phone format. Must be 10-15 digits total. International format: +[country][number] or [country][number]'
+            },
+            email: {
+                empty: 'Email address is required',
+                invalid: 'Please enter a valid email address (e.g., name@example.com). No special characters at start/end.',
+                pattern: 'Invalid email format. Must contain @ symbol and valid domain with TLD (e.g., .com, .org)'
+            },
+            message: {
+                empty: 'Message is required',
+                invalid: 'Message must be between 10 and 1000 characters',
+                min: 'Message must be at least 10 characters long',
+                max: 'Message cannot exceed 1000 characters',
+                pattern: 'Invalid message format or contains prohibited content'
+            }
+        };
+
+        // STRICT Validation Functions
+        function validateName(name) {
+            if (!name || name.trim() === '') {
+                return { valid: false, message: VALIDATION_MESSAGES.name.empty };
+            }
+            const trimmedName = name.trim();
+            // Check length first
+            if (trimmedName.length < 2 || trimmedName.length > 50) {
+                return { valid: false, message: VALIDATION_MESSAGES.name.invalid };
+            }
+            // Must start and end with letter
+            if (!/^[a-zA-Z]/.test(trimmedName) || !/[a-zA-Z]$/.test(trimmedName)) {
+                return { valid: false, message: VALIDATION_MESSAGES.name.pattern };
+            }
+            // No consecutive spaces, hyphens, or apostrophes
+            if (/[\s'-]{2,}/.test(trimmedName)) {
+                return { valid: false, message: VALIDATION_MESSAGES.name.invalid };
+            }
+            // Strict pattern check
+            if (!VALIDATION_PATTERNS.name.test(trimmedName)) {
+                return { valid: false, message: VALIDATION_MESSAGES.name.pattern };
+            }
+            return { valid: true, message: '' };
+        }
+
+        function validatePhone(phone) {
+            if (!phone || phone.trim() === '') {
+                return { valid: false, message: VALIDATION_MESSAGES.phone.empty };
+            }
+            // Remove all non-digit characters except +
+            const cleanedPhone = phone.replace(/[^\d+]/g, '');
+            // Must start with + or digit 1-9
+            if (!/^\+?\d/.test(cleanedPhone)) {
+                return { valid: false, message: VALIDATION_MESSAGES.phone.invalid };
+            }
+            // If starts with +, remove it for length check
+            const digitsOnly = cleanedPhone.replace('+', '');
+            // Check total length (7-15 digits)
+            if (digitsOnly.length < 7 || digitsOnly.length > 15) {
+                return { valid: false, message: VALIDATION_MESSAGES.phone.invalid };
+            }
+            // Must start with 1-9 (not 0)
+            if (!/^[1-9]/.test(digitsOnly)) {
+                return { valid: false, message: VALIDATION_MESSAGES.phone.invalid };
+            }
+            // Strict pattern check
+            if (!VALIDATION_PATTERNS.phone.test(digitsOnly)) {
+                return { valid: false, message: VALIDATION_MESSAGES.phone.pattern };
+            }
+            return { valid: true, message: '', cleaned: cleanedPhone.startsWith('+') ? cleanedPhone : '+' + digitsOnly };
+        }
+
+        function validateEmail(email) {
+            if (!email || email.trim() === '') {
+                return { valid: false, message: VALIDATION_MESSAGES.email.empty };
+            }
+            const trimmedEmail = email.trim().toLowerCase();
+            // Basic structure check
+            if (!trimmedEmail.includes('@') || !trimmedEmail.includes('.')) {
+                return { valid: false, message: VALIDATION_MESSAGES.email.invalid };
+            }
+            // No consecutive dots or special characters
+            if (/\.{2,}|@{2,}|[._%+-]{3,}/.test(trimmedEmail)) {
+                return { valid: false, message: VALIDATION_MESSAGES.email.invalid };
+            }
+            // Must start and end with alphanumeric
+            if (!/^[a-zA-Z0-9]/.test(trimmedEmail) || !/[a-zA-Z0-9]$/.test(trimmedEmail)) {
+                return { valid: false, message: VALIDATION_MESSAGES.email.invalid };
+            }
+            // Check domain part has valid TLD
+            const parts = trimmedEmail.split('@');
+            if (parts.length !== 2) {
+                return { valid: false, message: VALIDATION_MESSAGES.email.pattern };
+            }
+            const domain = parts[1];
+            if (!domain.includes('.') || domain.split('.').length < 2) {
+                return { valid: false, message: VALIDATION_MESSAGES.email.pattern };
+            }
+            const tld = domain.split('.').pop();
+            if (tld.length < 2) {
+                return { valid: false, message: VALIDATION_MESSAGES.email.pattern };
+            }
+            // Strict pattern check
+            if (!VALIDATION_PATTERNS.email.test(trimmedEmail)) {
+                return { valid: false, message: VALIDATION_MESSAGES.email.pattern };
+            }
+            return { valid: true, message: '' };
+        }
+
+        function validateMessage(message) {
+            if (!message || message.trim() === '') {
+                return { valid: false, message: VALIDATION_MESSAGES.message.empty };
+            }
+            const trimmedMessage = message.trim();
+            // Check length
+            if (trimmedMessage.length < 10) {
+                return { valid: false, message: VALIDATION_MESSAGES.message.min };
+            }
+            if (trimmedMessage.length > 1000) {
+                return { valid: false, message: VALIDATION_MESSAGES.message.max };
+            }
+            // Check for script injection attempts
+            if (/<script|javascript:|onerror=|onload=|onclick=|onmouseover=|<iframe|data:text\/html/i.test(trimmedMessage)) {
+                return { valid: false, message: 'Message contains prohibited content. Please remove any script tags, event handlers, or HTML tags.' };
+            }
+            // Strict pattern check
+            if (!VALIDATION_PATTERNS.message.test(trimmedMessage)) {
+                return { valid: false, message: VALIDATION_MESSAGES.message.invalid };
+            }
+            return { valid: true, message: '' };
+        }
+
+        // Show Error Function
+        function showError(fieldId, errorId, message) {
+            const field = document.getElementById(fieldId);
+            const errorSpan = document.getElementById(errorId);
+            
+            if (field && errorSpan) {
+                field.classList.remove('valid');
+                field.classList.add('invalid');
+                errorSpan.textContent = message;
+                errorSpan.style.display = 'block';
+            }
+        }
+
+        // Hide Error / Show Valid Function
+        function hideError(fieldId, errorId) {
+            const field = document.getElementById(fieldId);
+            const errorSpan = document.getElementById(errorId);
+            
+            if (field && errorSpan) {
+                field.classList.remove('invalid');
+                field.classList.add('valid');
+                errorSpan.textContent = '';
+                errorSpan.style.display = 'none';
+            }
+        }
+
+        // Clear validation state
+        function clearValidation(fieldId, errorId) {
+            const field = document.getElementById(fieldId);
+            const errorSpan = document.getElementById(errorId);
+            
+            if (field && errorSpan) {
+                field.classList.remove('invalid', 'valid');
+                errorSpan.textContent = '';
+                errorSpan.style.display = 'none';
+            }
+        }
+
         // Device Detection Function
         function isMobileDevice() {
             return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
                    (window.innerWidth <= 768 && window.matchMedia("(pointer: coarse)").matches);
         }
         
-        // WhatsApp Contact Button Handler
+        // WhatsApp Contact Button Handler with Strict Validation
         document.addEventListener('DOMContentLoaded', () => {
+            // Get form elements
+            const nameField = document.getElementById('contact-name');
+            const phoneField = document.getElementById('contact-phone');
+            const emailField = document.getElementById('contact-email');
+            const messageField = document.getElementById('contact-message');
             const contactBtn = document.getElementById('contact-us-btn');
+
+            // Real-time Validation on Input
+            if (nameField) {
+                nameField.addEventListener('blur', () => {
+                    const validation = validateName(nameField.value);
+                    if (!validation.valid) {
+                        showError('contact-name', 'name-error', validation.message);
+                    } else {
+                        hideError('contact-name', 'name-error');
+                    }
+                });
+
+                nameField.addEventListener('input', () => {
+                    if (nameField.classList.contains('invalid')) {
+                        const validation = validateName(nameField.value);
+                        if (validation.valid) {
+                            hideError('contact-name', 'name-error');
+                        }
+                    }
+                });
+            }
+
+            if (phoneField) {
+                phoneField.addEventListener('blur', () => {
+                    const validation = validatePhone(phoneField.value);
+                    if (!validation.valid) {
+                        showError('contact-phone', 'phone-error', validation.message);
+                    } else {
+                        hideError('contact-phone', 'phone-error');
+                    }
+                });
+
+                phoneField.addEventListener('input', () => {
+                    if (phoneField.classList.contains('invalid')) {
+                        const validation = validatePhone(phoneField.value);
+                        if (validation.valid) {
+                            hideError('contact-phone', 'phone-error');
+                        }
+                    }
+                });
+            }
+
+            if (emailField) {
+                emailField.addEventListener('blur', () => {
+                    const validation = validateEmail(emailField.value);
+                    if (!validation.valid) {
+                        showError('contact-email', 'email-error', validation.message);
+                    } else {
+                        hideError('contact-email', 'email-error');
+                    }
+                });
+
+                emailField.addEventListener('input', () => {
+                    if (emailField.classList.contains('invalid')) {
+                        const validation = validateEmail(emailField.value);
+                        if (validation.valid) {
+                            hideError('contact-email', 'email-error');
+                        }
+                    }
+                });
+            }
+
+            if (messageField) {
+                messageField.addEventListener('blur', () => {
+                    const validation = validateMessage(messageField.value);
+                    if (!validation.valid) {
+                        showError('contact-message', 'message-error', validation.message);
+                    } else {
+                        hideError('contact-message', 'message-error');
+                    }
+                });
+
+                messageField.addEventListener('input', () => {
+                    if (messageField.classList.contains('invalid')) {
+                        const validation = validateMessage(messageField.value);
+                        if (validation.valid) {
+                            hideError('contact-message', 'message-error');
+                        }
+                    }
+                });
+            }
+
+            // Form Submission Handler with STRICT Validation
             if (contactBtn) {
-                contactBtn.addEventListener('click', () => {
-                    const name = document.getElementById('contact-name')?.value || '';
-                    const phone = document.getElementById('contact-phone')?.value || '';
-                    const email = document.getElementById('contact-email')?.value || '';
-                    const message = document.getElementById('contact-message')?.value || '';
+                contactBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
                     
-                    // Build WhatsApp message
+                    const name = nameField?.value || '';
+                    const phone = phoneField?.value || '';
+                    const email = emailField?.value || '';
+                    const message = messageField?.value || '';
+                    
+                    let isValid = true;
+                    let firstErrorField = null;
+
+                    // Validate Name
+                    const nameValidation = validateName(name);
+                    if (!nameValidation.valid) {
+                        showError('contact-name', 'name-error', nameValidation.message);
+                        isValid = false;
+                        if (!firstErrorField) firstErrorField = nameField;
+                    } else {
+                        hideError('contact-name', 'name-error');
+                    }
+
+                    // Validate Phone
+                    const phoneValidation = validatePhone(phone);
+                    if (!phoneValidation.valid) {
+                        showError('contact-phone', 'phone-error', phoneValidation.message);
+                        isValid = false;
+                        if (!firstErrorField) firstErrorField = phoneField;
+                    } else {
+                        hideError('contact-phone', 'phone-error');
+                    }
+
+                    // Validate Email
+                    const emailValidation = validateEmail(email);
+                    if (!emailValidation.valid) {
+                        showError('contact-email', 'email-error', emailValidation.message);
+                        isValid = false;
+                        if (!firstErrorField) firstErrorField = emailField;
+                    } else {
+                        hideError('contact-email', 'email-error');
+                    }
+
+                    // Validate Message
+                    const messageValidation = validateMessage(message);
+                    if (!messageValidation.valid) {
+                        showError('contact-message', 'message-error', messageValidation.message);
+                        isValid = false;
+                        if (!firstErrorField) firstErrorField = messageField;
+                    } else {
+                        hideError('contact-message', 'message-error');
+                    }
+
+                    // If validation failed, scroll to first error
+                    if (!isValid && firstErrorField) {
+                        firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        firstErrorField.focus();
+                        return;
+                    }
+
+                    // All validations passed - use cleaned/validated values
+                    const validatedName = name.trim();
+                    const validatedPhone = phoneValidation.cleaned || phone.trim();
+                    const validatedEmail = email.trim().toLowerCase();
+                    const validatedMessage = message.trim();
+                    
+                    // Build WhatsApp message with validated data
                     let whatsappMessage = 'Hello! I would like to get in touch.\n\n';
-                    if (name) whatsappMessage += `Name: ${name}\n`;
-                    if (phone) whatsappMessage += `Phone: ${phone}\n`;
-                    if (email) whatsappMessage += `Email: ${email}\n`;
-                    if (message) whatsappMessage += `\nMessage: ${message}`;
+                    whatsappMessage += `Name: ${validatedName}\n`;
+                    whatsappMessage += `Phone: ${validatedPhone}\n`;
+                    whatsappMessage += `Email: ${validatedEmail}\n`;
+                    whatsappMessage += `\nMessage: ${validatedMessage}`;
                     
                     // Encode message for URL
                     const encodedMessage = encodeURIComponent(whatsappMessage);
